@@ -2,10 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
-@layer base{
-    body{
-        @apply bg-black/60
-    }
+@layer base {
+  h1 {
+    @apply font-bold;
+  }
+  h2 {
+    @apply font-bold;
+  }
+  h3 {
+    @apply font-bold;
+  }
+  h4 {
+    @apply font-bold;
+  }
+  h5 {
+    @apply font-semibold;
+  }
+  h6 {
+    @apply font-semibold;
+  }
 }

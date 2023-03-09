@@ -1,8 +1,8 @@
 import Head from "next/head";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import HomeCard from "@/components/HomeCard";
 import { ResponseType } from "@/typings";
+import CurrentCard from "@/components/current/CurrentCard";
 
 export default function Home() {
   const API_KEY = process.env.NEXT_PUBLIC_WEATHER_API_KEY;
@@ -29,6 +29,12 @@ export default function Home() {
       });
   }, []);
 
+  const [selectedOption, setSelectedOption] = useState("current");
+
+  function handleOptionChange(event: any) {
+    setSelectedOption(event.target.value);
+  }
+
   return (
     <>
       <Head>
@@ -37,12 +43,18 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
-        <h1>WEATHER APP</h1>
 
-        <div>
-          <HomeCard response={response} />
-        </div>
+      <main className="flex flex-col items-center space-y-10 ">
+        <h1 className="text-6xl">WEATHER APP</h1>
+        <select value={selectedOption} onChange={handleOptionChange}>
+          <option value="current">Current</option>
+          <option value="day">Daily</option>
+          <option value="hour">Hourly</option>
+        </select>
+
+        {selectedOption === "current"
+          ? response && <CurrentCard response={response} />
+          : null}
       </main>
     </>
   );
