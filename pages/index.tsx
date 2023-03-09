@@ -2,7 +2,9 @@ import Head from "next/head";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { ResponseType } from "@/typings";
-import CurrentCard from "@/components/current/CurrentCard";
+import CurrentSection from "@/components/current/CurrentSection";
+import DailySection from "@/components/daily/DailySection";
+import HourlySection from "@/components/hourly/HourlySection";
 
 export default function Home() {
   const API_KEY = process.env.NEXT_PUBLIC_WEATHER_API_KEY;
@@ -35,6 +37,10 @@ export default function Home() {
     setSelectedOption(event.target.value);
   }
 
+  if (!response) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
       <Head>
@@ -44,17 +50,29 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      <header className="w-full px-3 md:px-8 py-3">
+        <h1 className="text-4xl font-bold">{`${response.location.name} 
+        (${response.location.country})`}</h1>
+      </header>
+
       <main className="flex flex-col items-center space-y-10 ">
-        <h1 className="text-6xl">WEATHER APP</h1>
-        <select value={selectedOption} onChange={handleOptionChange}>
+        <select
+          className="shadow-md shadow-sky-500 px-4 py-2 rounded-lg "
+          value={selectedOption}
+          onChange={handleOptionChange}
+        >
           <option value="current">Current</option>
           <option value="day">Daily</option>
           <option value="hour">Hourly</option>
         </select>
 
-        {selectedOption === "current"
-          ? response && <CurrentCard response={response} />
-          : null}
+        {selectedOption === "current" ? (
+          <CurrentSection response={response} />
+        ) : selectedOption === "day" ? (
+          <DailySection response={response} />
+        ) : (
+          <HourlySection response={response} />
+        )}
       </main>
     </>
   );

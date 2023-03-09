@@ -3,11 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import CurrentGrid from "./CurrentGrid";
 
-type Props = {
-  response: ResponseType;
-};
-
-function CurrentCard({ response }: Props) {
+function CurrentSection({ response }: { response: ResponseType }) {
   const current = response.current;
   return (
     <div
@@ -38,26 +34,8 @@ function CurrentCard({ response }: Props) {
       <p>{current.condition.text}</p>
 
       <CurrentGrid current={current} />
-      <div className="flex justify-around">
-        <Link
-          className="px-4 py-2 rounded-lg
-          shadow-md shadow-sky-500 hover:scale-105 ease-in duration-200
-          "
-          href="/"
-        >
-          See daily
-        </Link>
-        <Link
-          className="px-4 py-2 rounded-lg
-          shadow-md shadow-sky-500 hover:scale-105 ease-in duration-200
-          "
-          href="/"
-        >
-          See hourly
-        </Link>
-      </div>
     </div>
   );
 }
 
-export default CurrentCard;
+export default CurrentSection;
