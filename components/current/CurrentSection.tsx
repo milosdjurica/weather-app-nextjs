@@ -1,16 +1,20 @@
 import { ResponseType } from "@/typings";
 import Image from "next/image";
+import Link from "next/link";
 
 function CurrentSection({ response }: { response: ResponseType }) {
   const current = response.current;
   return (
     <div className="flex flex-col items-center space-y-5">
-      <h1 className="text-4xl font-bold">{response.location.name}</h1>
+      <Link href={`/current/${response.location.name}`}>
+        <h1 className="text-4xl font-bold">{response.location.name}</h1>
+      </Link>
       <h5 className="text-lg">
         {response.location.country} {response.location.localtime.split(" ")[1]}
       </h5>
-
-      <h2 className="text-4xl font-semibold">{current.temp_c} °C</h2>
+      <Link href={`/current/${response.location.name}`}>
+        <h2 className="text-4xl font-semibold">{current.temp_c} °C</h2>
+      </Link>
       <div className="flex items-center space-x-4 font-semibold">
         <p className="text-lg">{current.condition.text} </p>
         <Image
