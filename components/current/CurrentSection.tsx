@@ -1,9 +1,13 @@
-import { ResponseType } from "@/typings";
+import { useStore } from "@/store";
 import Image from "next/image";
 import CurrentGrid from "./CurrentGrid";
 
-function CurrentSection({ response }: { response: ResponseType }) {
+function CurrentSection() {
+  const response = useStore((state) => state.response);
+  if (response === null) return null;
+
   const current = response.current;
+
   return (
     <div className="flex flex-col items-center space-y-5">
       <h1 className="text-5xl font-bold">{response.location.name}</h1>

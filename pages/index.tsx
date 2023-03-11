@@ -1,44 +1,11 @@
 import Head from "next/head";
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { ResponseType } from "@/typings";
 import CurrentSection from "@/components/current/CurrentSection";
 import DailySection from "@/components/daily/DailySection";
 import HourlySection from "@/components/hourly/HourlySection";
+import { useStore } from "@/store";
 
 export default function Home() {
-  const API_KEY = process.env.NEXT_PUBLIC_WEATHER_API_KEY;
-  const [response, setResponse] = useState<ResponseType | null>(null);
-  const [currentCity, setCurrentCity] = useState("Novi Sad");
-
-  const options = {
-    method: "GET",
-    url: "https://weatherapi-com.p.rapidapi.com/forecast.json",
-    params: { q: currentCity, days: "3" },
-    headers: {
-      "X-RapidAPI-Key": API_KEY,
-      "X-RapidAPI-Host": "weatherapi-com.p.rapidapi.com",
-    },
-  };
-
-  function makeRequest() {
-    axios
-      .request(options)
-      .then(function (response) {
-        setResponse(response.data);
-      })
-      .catch(function (error) {
-        console.error(error);
-      });
-  }
-
-  function changeCity(e: any) {
-    setCurrentCity(e.target.value);
-  }
-
-  useEffect(() => {
-    makeRequest();
-  }, []);
+  const response = useStore((state) => state.response);
 
   if (!response) {
     return (
@@ -67,23 +34,7 @@ export default function Home() {
         bg-gradient-to-b from-blue-100 via-blue-300 to-blue-500
         flex flex-col items-center "
       >
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            makeRequest();
-          }}
-        >
-          <label className="text-xl font-semibold">Enter city name </label>
-          <input
-            type="text"
-            className="rounded-xl px-3 bg-blue-100 
-            text-center 
-            border-2 border-blue-900"
-            onChange={changeCity}
-          />
-        </form>
-
-        <CurrentSection response={response} />
+        <CurrentSection />
         <HourlySection response={response} />
         <DailySection response={response} />
       </main>
