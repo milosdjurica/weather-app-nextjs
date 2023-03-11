@@ -13,7 +13,12 @@ function Layout({ children }: any) {
       </Head>
 
       <Header />
-      <main>{children}</main>
+      <main
+        className="min-w-full min-h-screen space-y-10 py-10
+        flex flex-col items-center"
+      >
+        {children}
+      </main>
       <Footer />
     </>
   );

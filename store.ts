@@ -10,7 +10,7 @@ type Action = {
 };
 
 // Create your store, which includes both state and (optionally) actions
-export const useStore = create<State & Action>((set) => ({
+export const useMyStore = create<State & Action>((set) => ({
   response: null,
   updateResponse: (response) => set(() => ({ response: response })),
 }));

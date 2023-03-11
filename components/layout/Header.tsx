@@ -1,14 +1,14 @@
 import axios from "axios";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { useStore } from "@/store";
+import { useMyStore } from "@/store";
 import { ResponseType } from "@/typings";
 
 function Header() {
   const API_KEY = process.env.NEXT_PUBLIC_WEATHER_API_KEY;
 
   const [currentCity, setCurrentCity] = useState("Novi Sad");
-  const [response, updateResponse] = useStore((state) => [
+  const [response, updateResponse] = useMyStore((state) => [
     state.response,
     state.updateResponse,
   ]);
@@ -24,6 +24,9 @@ function Header() {
   };
 
   function makeRequest() {
+    // !Query for the API has to be at least 3 characters long
+    if (currentCity.length < 3) return null;
+
     axios
       .request(options)
       .then(function (response) {
@@ -44,18 +47,32 @@ function Header() {
   }, []);
 
   return (
-    <header className="flex justify-between">
-      <Link href="/">Home</Link>
+    <header
+      className="flex justify-between items-center
+      p-4 border-b-2 border-blue-900"
+    >
+      <Link
+        href="/"
+        className="px-4 py-1 max-w-[80px] 
+        rounded-lg font-semibold text-lg
+      flex justify-center 
+    bg-blue-400 shadow-lg shadow-blue-400 border
+      hover:scale-105 ease-in duration-200
+      "
+      >
+        Home
+      </Link>
+
       <form
         onSubmit={(e) => {
           e.preventDefault();
           makeRequest();
         }}
       >
-        <label className="text-xl font-semibold">Enter city name </label>
         <input
           type="text"
-          className="rounded-xl px-3 bg-blue-100 
+          placeholder="Novi Sad"
+          className="rounded-xl px-3 py-1 bg-blue-100 
       text-center 
       border-2 border-blue-900"
           onChange={changeCity}

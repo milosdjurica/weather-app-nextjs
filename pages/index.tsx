@@ -2,18 +2,16 @@ import Head from "next/head";
 import CurrentSection from "@/components/current/CurrentSection";
 import DailySection from "@/components/daily/DailySection";
 import HourlySection from "@/components/hourly/HourlySection";
-import { useStore } from "@/store";
+import { useMyStore } from "@/store";
 
 export default function Home() {
-  const response = useStore((state) => state.response);
+  const response = useMyStore((state) => state.response);
 
   if (!response) {
     return (
       <div
         className="flex justify-center items-center
-    min-w-full min-h-screen
-    bg-gradient-to-b from-blue-100 via-blue-300 to-blue-500
-    "
+    min-w-full min-h-screen"
       >
         Loading data...
       </div>
@@ -29,15 +27,13 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main
-        className="min-w-full min-h-screen space-y-10 py-10
-        bg-gradient-to-b from-blue-100 via-blue-300 to-blue-500
-        flex flex-col items-center "
-      >
-        <CurrentSection />
-        <HourlySection response={response} />
-        <DailySection response={response} />
-      </main>
+      {/* //! I could use useMyStore from zustand in every component
+            but since i am using response data in every component 
+            and project is small i didn't want to change it.
+            It is faster this way and has less code.*/}
+      <CurrentSection response={response} />
+      <HourlySection response={response} />
+      <DailySection response={response} />
     </>
   );
 }
