@@ -9,18 +9,19 @@ import HourlySection from "@/components/hourly/HourlySection";
 export default function Home() {
   const API_KEY = process.env.NEXT_PUBLIC_WEATHER_API_KEY;
   const [response, setResponse] = useState<ResponseType | null>(null);
+  const [currentCity, setCurrentCity] = useState("Novi Sad");
 
   const options = {
     method: "GET",
     url: "https://weatherapi-com.p.rapidapi.com/forecast.json",
-    params: { q: "Casablanca", days: "3" },
+    params: { q: currentCity, days: "3" },
     headers: {
       "X-RapidAPI-Key": API_KEY,
       "X-RapidAPI-Host": "weatherapi-com.p.rapidapi.com",
     },
   };
 
-  useEffect(() => {
+  function makeRequest() {
     axios
       .request(options)
       .then(function (response) {
@@ -29,10 +30,27 @@ export default function Home() {
       .catch(function (error) {
         console.error(error);
       });
+  }
+
+  function changeCity(e: any) {
+    setCurrentCity(e.target.value);
+  }
+
+  useEffect(() => {
+    makeRequest();
   }, []);
 
   if (!response) {
-    return <div>Loading...</div>;
+    return (
+      <div
+        className="flex justify-center items-center
+    min-w-full min-h-screen
+    bg-gradient-to-b from-blue-100 via-blue-300 to-blue-500
+    "
+      >
+        Loading data...
+      </div>
+    );
   }
 
   return (
@@ -44,7 +62,27 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className=" flex flex-col items-center mt-10 space-y-10">
+      <main
+        className="min-w-full min-h-screen space-y-10 py-10
+        bg-gradient-to-b from-blue-100 via-blue-300 to-blue-500
+        flex flex-col items-center "
+      >
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            makeRequest();
+          }}
+        >
+          <label className="text-xl font-semibold">Enter city name </label>
+          <input
+            type="text"
+            className="rounded-xl px-3 bg-blue-100 
+            text-center 
+            border-2 border-blue-900"
+            onChange={changeCity}
+          />
+        </form>
+
         <CurrentSection response={response} />
         <HourlySection response={response} />
         <DailySection response={response} />

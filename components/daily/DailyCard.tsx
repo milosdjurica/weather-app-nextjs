@@ -1,6 +1,6 @@
 import { Day } from "@/typings";
 import Image from "next/image";
-import { BsCloudRain } from "react-icons/bs";
+import { BsFillCloudRainFill } from "react-icons/bs";
 
 function DailyCard({ forecast }: { forecast: Day }) {
   const day = forecast.day;
@@ -22,22 +22,23 @@ function DailyCard({ forecast }: { forecast: Day }) {
 
   return (
     <div
-      className="grid grid-cols-4 items-center gap-2
-    min-h-[70px] cursor-pointer
-    border-b border-sky-500"
+      className="grid grid-cols-3 sm:grid-cols-4 items-center gap-2
+    min-h-[70px] text-xl
+    shadow-lg rounded-md p-4 shadow-blue-800"
     >
-      <h4 className="font-semibold text-xl">{getDayOfWeek(forecast.date)}</h4>
+      <h4 className="font-semibold">{getDayOfWeek(forecast.date)}</h4>
       <Image
-        width={30}
-        height={30}
+        width={40}
+        height={40}
         src={`https:${day.condition.icon}`}
         alt={day.condition.text}
       />
 
-      <h3 className="text-xl">{Math.round(day.avgtemp_c)} °C</h3>
-      <div className="flex space-x-2 items-center justify-center">
-        <p className="text-xl font-semibold">{day.daily_chance_of_rain}%</p>
-        <BsCloudRain className="text-sky-500 text-lg" />
+      <h3>{Math.round(day.avgtemp_c)} °C</h3>
+
+      <div className="hidden sm:flex space-x-2 items-center justify-end">
+        <p className="font-semibold">{day.daily_chance_of_rain}%</p>
+        <BsFillCloudRainFill className="text-white w-6 h-6" />
       </div>
     </div>
   );

@@ -22,3 +22,10 @@
     @apply font-semibold;
   }
 }
+
+@layer components {
+  .gridStyle {
+    @apply shadow-lg text-center shadow-blue-900 py-2 md:py-4 px-4 rounded-xl md:space-x-4
+    flex flex-col md:flex-row justify-between;
+  }
+}
