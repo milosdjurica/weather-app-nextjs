@@ -4,7 +4,7 @@ import { BsGithub, BsLinkedin } from "react-icons/bs";
 function Footer() {
   return (
     <div
-      className="p-2 sm:px-4 bg-white text-center font-semibold
+      className="p-2 sm:px-4 bg-blue-200 text-center font-semibold
     grid grid-cols-1 md:grid-cols-4 items-center"
     >
       <h3 className="text-lg">
