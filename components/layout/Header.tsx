@@ -55,8 +55,8 @@ function Header() {
         href="/"
         className="px-4 py-1 max-w-[80px] 
         rounded-lg font-semibold text-lg
-      flex justify-center 
-    bg-blue-400 shadow-lg shadow-blue-400 border
+      flex justify-center
+    bg-blue-300 shadow-lg shadow-blue-400 
       hover:scale-105 ease-in duration-200
       "
       >
