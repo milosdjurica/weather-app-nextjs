@@ -32,7 +32,7 @@ function DailyCard({ forecast, index }: { forecast: Day; index: number }) {
 
   return (
     <Link
-      href={`/${getDayOfWeek(forecast.date)}`}
+      href={`/${forecast.date}`}
       onClick={() => updateDaySelected(index)}
       className="grid grid-cols-3 sm:grid-cols-4 items-center gap-2
     min-h-[70px] text-xl
