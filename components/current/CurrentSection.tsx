@@ -1,11 +1,11 @@
 import { ResponseType } from "@/typings";
 import Image from "next/image";
-import CurrentGrid from "./CurrentGrid";
+import Link from "next/link";
 
 function CurrentSection({ response }: { response: ResponseType }) {
   const current = response.current;
   return (
-    <div className="flex flex-col items-center space-y-5">
+    <Link href="/current" className="flex flex-col items-center space-y-5">
       <h1 className="text-5xl font-bold">{response.location.name}</h1>
       <h5 className="text-2xl">
         {response.location.country} {response.location.localtime.split(" ")[1]}
@@ -21,14 +21,7 @@ function CurrentSection({ response }: { response: ResponseType }) {
           alt={current.condition.text}
         />
       </div>
-      <div className="flex space-x-4">
-        <CurrentGrid current={current} />
-        {/* <p className="text-md font-semibold">Humidity: {current.humidity}%</p>
-        <p className="text-md font-semibold">
-          Precipitation: {current.precip_mm}mm
-        </p> */}
-      </div>
-    </div>
+    </Link>
   );
 }
 

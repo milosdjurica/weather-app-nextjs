@@ -1,8 +1,15 @@
 import Head from "next/head";
+import { useRouter } from "next/router";
 import Footer from "./Footer";
 import Header from "./Header";
+import NotFound from "./NotFound";
 
 function Layout({ children }: any) {
+  const router = useRouter();
+  const is404 = router.pathname === "/_error";
+
+  if (is404) return <NotFound />;
+
   return (
     <>
       <Head>

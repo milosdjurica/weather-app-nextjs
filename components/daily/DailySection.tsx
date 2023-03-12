@@ -7,8 +7,14 @@ function DailySection({ response }: { response: ResponseType }) {
   return (
     <div className="mb-20 w-[90%] space-y-4 md:w-2/3">
       <h5 className="text-center text-2xl font-bold">3 Days Forecast</h5>
-      {forecasts.map((forecast) => {
-        return <DailyCard key={forecast.date_epoch} forecast={forecast} />;
+      {forecasts.map((forecast, index) => {
+        return (
+          <DailyCard
+            key={forecast.date_epoch}
+            index={index}
+            forecast={forecast}
+          />
+        );
       })}
     </div>
   );

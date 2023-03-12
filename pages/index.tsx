@@ -3,19 +3,13 @@ import CurrentSection from "@/components/current/CurrentSection";
 import DailySection from "@/components/daily/DailySection";
 import HourlySection from "@/components/hourly/HourlySection";
 import { useMyStore } from "@/store";
+import Loading from "@/components/layout/Loading";
 
 export default function Home() {
   const response = useMyStore((state) => state.response);
 
   if (!response) {
-    return (
-      <div
-        className="flex justify-center items-center
-    min-w-full min-h-screen"
-      >
-        Loading data...
-      </div>
-    );
+    return <Loading />;
   }
 
   return (
