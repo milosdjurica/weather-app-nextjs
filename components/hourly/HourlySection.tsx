@@ -1,11 +1,13 @@
 import { ResponseType } from "@/typings";
 import { useRef, useState } from "react";
 import HourlyCard from "./HourlyCard";
-
 import { GoChevronLeft, GoChevronRight } from "react-icons/go";
+import { useMyStore } from "@/store";
 
 function HourlySection({ response }: { response: ResponseType }) {
-  const todayHours = response.forecast.forecastday[0].hour;
+  const daySelected = useMyStore((state) => state.daySelected);
+
+  const dayHours = response.forecast.forecastday[daySelected].hour;
 
   const rowRef = useRef<HTMLDivElement>(null);
   const [isMoved, setIsMoved] = useState(false);
@@ -41,8 +43,14 @@ function HourlySection({ response }: { response: ResponseType }) {
           className="flex space-x-2 p-2 md:p-4 rounded-lg
           border-2 border-blue-900 overflow-x-scroll scrollbar-hide"
         >
-          {todayHours.map((hour) => {
-            return <HourlyCard key={hour.time_epoch} todayHour={hour} />;
+          {dayHours.map((hour, index) => {
+            return (
+              <HourlyCard
+                key={hour.time_epoch}
+                index={index}
+                pickedHour={hour}
+              />
+            );
           })}
         </div>
 

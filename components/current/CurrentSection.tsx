@@ -5,7 +5,7 @@ import Link from "next/link";
 function CurrentSection({ response }: { response: ResponseType }) {
   const current = response.current;
   return (
-    <Link href="/current" className="flex flex-col items-center space-y-5">
+    <Link href="/current" className="flex flex-col items-center space-y-5 text-center">
       <h1 className="text-5xl font-bold">{response.location.name}</h1>
       <h5 className="text-2xl">
         {response.location.country} {response.location.localtime.split(" ")[1]}

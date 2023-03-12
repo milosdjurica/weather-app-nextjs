@@ -4,9 +4,21 @@ import DailySection from "@/components/daily/DailySection";
 import HourlySection from "@/components/hourly/HourlySection";
 import { useMyStore } from "@/store";
 import Loading from "@/components/layout/Loading";
+import { useEffect } from "react";
 
 export default function Home() {
-  const response = useMyStore((state) => state.response);
+  const [response, updateDaySelected] = useMyStore((state) => [
+    state.response,
+    state.updateDaySelected,
+  ]);
+
+  useEffect(() => {
+    //!reseting date to today because
+    //! when user choses date and then go back home and then pick hour
+    //! i want hour to be from today, and not remembering last selected day
+
+    updateDaySelected(0);
+  }, []);
 
   if (!response) {
     return <Loading />;
