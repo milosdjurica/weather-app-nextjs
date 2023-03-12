@@ -4,7 +4,8 @@
 
 @layer base {
   body {
-    @apply bg-gradient-to-b from-blue-100 via-blue-300 to-blue-500;
+    @apply bg-gradient-to-b from-blue-100 via-blue-300 to-blue-500
+    w-full;
   }
 
   h1 {

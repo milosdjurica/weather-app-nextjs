@@ -21,7 +21,7 @@ function Layout({ children }: any) {
 
       <Header />
       <main
-        className="min-w-full min-h-screen space-y-10 py-10
+        className="w-full min-h-screen space-y-10 py-10
         flex flex-col items-center"
       >
         {children}

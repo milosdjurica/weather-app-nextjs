@@ -73,7 +73,7 @@ function Header() {
           type="text"
           placeholder="Novi Sad"
           className="rounded-xl px-3 py-1 bg-blue-100 
-      text-center 
+      text-center w-[150px] sm:w-[200px]
       border-2 border-blue-900"
           onChange={changeCity}
         />

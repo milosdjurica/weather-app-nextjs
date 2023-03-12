@@ -11,10 +11,10 @@ function Current() {
   const current = response.current;
 
   return (
-    <main>
+    <div>
       <CurrentSection response={response} />
       <CurrentGrid current={current} />
-    </main>
+    </div>
   );
 }
 

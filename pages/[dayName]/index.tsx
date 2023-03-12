@@ -26,7 +26,7 @@ function Day() {
 
   return (
     <div className="text-center space-y-20 w-full">
-      <main className="space-y-5 text-2xl text-center">
+      <div className="space-y-5 text-2xl text-center">
         <h1 className="text-5xl">{response.location.name}</h1>
 
         <h2>Forecast for {chosenDay.date}</h2>
@@ -48,7 +48,7 @@ function Day() {
           <p>Highest: {Math.round(chosenDay.day.maxtemp_c)}°C</p>
           <p>Lowest: {Math.round(chosenDay.day.mintemp_c)}°C</p>
         </div>
-      </main>
+      </div>
       <div className="w-[90%] md:w-2/3 m-auto">
         <DailyGrid chosenDay={chosenDay} />
       </div>

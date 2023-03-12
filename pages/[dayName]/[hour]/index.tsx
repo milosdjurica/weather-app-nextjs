@@ -29,7 +29,7 @@ function Hour() {
 
   return (
     <div className="w-full space-y-20">
-      <main className="text-center space-y-5">
+      <div className="text-center space-y-5">
         <h1 className="text-5xl">{response.location.name}</h1>
         <h2 className="text-2xl">Forecast for {hourObj.time}</h2>
         <div className="flex items-center justify-center font-semibold">
@@ -48,7 +48,7 @@ function Hour() {
         <p className="font-semibold text-lg">
           Feels like: {Math.round(hourObj.feelslike_c)}°C
         </p>
-      </main>
+      </div>
 
       <HourGrid hourObj={hourObj} />
       <div className="flex justify-center">
