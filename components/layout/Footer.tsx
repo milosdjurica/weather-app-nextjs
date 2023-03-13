@@ -11,7 +11,7 @@ function Footer() {
         Created by{" "}
         <a
           className="hover:text-blue-500"
-          href="https://portfolio-milosdjurica.vercel.app/"
+          href="https://milosdjurica.vercel.app/"
         >
           Miloš Đurica
         </a>
