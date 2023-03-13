@@ -44,6 +44,7 @@ function DailyCard({ forecast, index }: { forecast: Day; index: number }) {
         height={40}
         src={`https:${dayWeather.condition.icon}`}
         alt={dayWeather.condition.text}
+        className="ml-5"
       />
 
       <h3>{Math.round(dayWeather.avgtemp_c)} °C</h3>
